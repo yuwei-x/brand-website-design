@@ -1,5 +1,5 @@
 ---
-name: video-to-website
+name: yuwei-video-to-website
 description: |
   将产品视频转为滚动驱动品牌主页。自动抽帧、Canvas 渲染、GSAP 动效编排。
   输入：一个视频文件。输出：可部署的品牌主页。
