@@ -8,9 +8,15 @@
 .
 ├── CLAUDE.md                          # 前端编码通用规范
 └── .claude/skills/
-    ├── frontend-design/               # 高质量前端界面生成 Skill
-    └── yuwei-video-to-website/        # 视频→滚动品牌主页 Skill
+    └── yuwei-video-to-website/        # 视频→滚动品牌主页 Skill（原创）
 ```
+
+此外还依赖一个**官方 Skill**（不包含在本仓库中，见下方安装说明）：
+
+| Skill | 来源 | 许可证 |
+|---|---|---|
+| `yuwei-video-to-website` | 本仓库 | CC BY-NC 4.0 |
+| `frontend-design` | [anthropics/skills](https://github.com/anthropics/skills/tree/main/skills/frontend-design) | Apache 2.0 |
 
 ### `CLAUDE.md`
 
@@ -21,15 +27,6 @@
 - 本地服务器启动与截图工作流
 - 输出默认值（文件结构、技术栈、占位图）
 - Anti-Generic 规则：配色、阴影、排版、动效、交互状态、间距
-
-### `frontend-design` Skill
-
-创建有辨识度、生产级别的前端界面，避免千篇一律的 AI 风格。
-
-功能：
-- 在编码前确定大胆的美学方向（极简、最大化、复古未来、编辑风等）
-- 生成可运行的 HTML/CSS/JS 或 React/Vue 代码
-- 排版、颜色、间距、动效全面精细化
 
 ### `yuwei-video-to-website` Skill
 
@@ -42,25 +39,56 @@
 - Lenis 平滑滚动
 - 14 项 Premium Checklist 底线保障
 
-## 使用方式
+### `frontend-design` Skill（官方）
 
-### 在新项目中使用这套规范
+由 Anthropic 官方维护，创建有辨识度、生产级别的前端界面，避免千篇一律的 AI 风格。
 
-1. 将 `CLAUDE.md` 复制到你的项目根目录
-2. 将 `.claude/skills/` 目录复制到你的项目 `.claude/` 目录
-3. 在 Claude Code 中打开项目，规范会自动生效
+源仓库：[anthropics/skills/skills/frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design)
 
-### 触发 Skill
+## 安装与使用
 
-在 Claude Code 中，直接描述需求即可自动触发对应 Skill：
+### 第一步：克隆本仓库
+
+```bash
+git clone https://github.com/yuwei-x/brand-website-design.git
+cd brand-website-design
+```
+
+### 第二步：安装官方 `frontend-design` Skill
+
+从 Anthropic 官方仓库单独下载（确保始终使用最新版本）：
+
+```bash
+# 方式一：使用 gstack（如已安装）
+gstack skills install frontend-design
+
+# 方式二：手动克隆官方 skill
+git clone --depth 1 --filter=blob:none --sparse \
+  https://github.com/anthropics/skills.git /tmp/anthropic-skills
+cd /tmp/anthropic-skills
+git sparse-checkout set skills/frontend-design
+cp -r skills/frontend-design ~/.claude/skills/frontend-design
+```
+
+### 第三步：在项目中使用
+
+```bash
+# 将规范文件复制到你的项目
+cp CLAUDE.md /your-project/
+mkdir -p /your-project/.claude/skills
+
+# 链接原创 skill
+ln -s ~/.claude/skills/yuwei-video-to-website /your-project/.claude/skills/
+# 链接官方 skill
+ln -s ~/.claude/skills/frontend-design /your-project/.claude/skills/
+```
+
+在 Claude Code 中打开项目后，直接描述需求即可触发对应 Skill：
 
 - **视频转网站**：「把这个视频做成一个滚动品牌主页」→ 触发 `yuwei-video-to-website`
 - **前端设计**：「做一个产品落地页」→ 触发 `frontend-design`
 
 ## 许可证
 
-本仓库内容（CLAUDE.md、Skill 文档、参考文档）采用 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) 许可证。
-
-- 可自由使用、修改和分享
-- 须署名原作者
-- 禁止用于商业目的
+- `CLAUDE.md`、`.claude/skills/yuwei-video-to-website/` 及本仓库其余原创内容：[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)（© 2026 yuwei-x）
+- `frontend-design` Skill 由 Anthropic 官方维护，遵循 [Apache 2.0](https://github.com/anthropics/skills/blob/main/LICENSE)，**不包含在本仓库中**
