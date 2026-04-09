@@ -6,9 +6,9 @@ This license applies to the original works in this repository:
   - CLAUDE.md
   - .claude/skills/yuwei-video-to-website/
 
-The frontend-design skill is NOT included in this repository. It is maintained
+The frontend-design skill (.claude/skills/frontend-design/) is maintained
 by Anthropic at https://github.com/anthropics/skills and is licensed under
-Apache 2.0.
+Apache 2.0. Its original LICENSE.txt is included in that directory.
 
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0
 International License.
